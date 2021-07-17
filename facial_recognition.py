@@ -19,6 +19,9 @@ while True:
         end_cord_y = y+h
         roi_gray = gray[y:end_cord_y, x:end_cord_x]  # Region of interest for gray (y_start-y_end)
         roi_color = frame[y:end_cord_y, x:end_cord_x] # Region of interest for color
+
+        # Recognize people using deep learning model
+
         img_item = "my-image.png"
         cv2.imwrite(img_item,roi_gray) # Write to image
 
