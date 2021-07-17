@@ -6,6 +6,7 @@ import cv2
 import pickle
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_alt2.xml')
+recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 current_id = 0
 label_ids = {}
@@ -29,6 +30,8 @@ for root, dirs, files in os.walk(image_dir):
             id = label_ids[label]
 
             pil_image = Image.open(path).convert("L") # Turns into grayscale
+            size = (550,550) 
+            final_image = pil_image.resize(size,Image.ANTIALIAS) # Resize to be more accurate
             image_array = np.array(pil_image,"uint8") # Turn image into numpy array
             faces = face_cascade.detectMultiScale(image_array) # Adjust factor
 
@@ -39,3 +42,7 @@ for root, dirs, files in os.walk(image_dir):
 # %%
 with open("labels.pkl", 'wb') as f:
     pickle.dump(label_ids, f)
+
+recognizer.train(x_train,np.array(y_labels))
+recognizer.save("trainer.yml")
+# %%
