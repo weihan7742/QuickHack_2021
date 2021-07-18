@@ -166,9 +166,25 @@ ScreenManager:
 <RecogniseScreen>:
     name: "recognise"
     orientation: "vertical"
-    Camera:
-        id: camera
-        resolution: (640, 480)
+    MDRaisedButton:
+        text: "Camera"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+        on_press:
+            app.load_facial()
+
+    MDRaisedButton:
+        text: "Stop"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+        on_press:
+            app.stop_facial()
 
     MDLabel:
         text: "Name: \n\n\n\nRelationship:"
@@ -189,7 +205,6 @@ ScreenManager:
         on_press:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
-
 
     # if time allows do call button for caregiver contact
 

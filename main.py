@@ -6,6 +6,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRectangleFlatButton
 from kivy.uix.camera import Camera
+from opencv_cam import CamApp
 
 # declare screens
 class PreLoadScreen(Screen):
@@ -32,6 +33,7 @@ class ScreenManager(ScreenManager):
 class iKnowU(MDApp):
 
     dialog = None
+    cam_app = CamApp()
 
     def build(self):
         buildkv = Builder.load_file("main.kv")
@@ -47,6 +49,11 @@ class iKnowU(MDApp):
     def close_popup(self,obj):
         self.dialog.dismiss()
 
+    def load_facial(self):
+        self.cam_app.run()
+
+    def stop_facial(self):
+        self.cam_app.my_camera.stop()
 
 if __name__ == "__main__":
     iKnowU().run()

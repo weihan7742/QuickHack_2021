@@ -9,6 +9,7 @@ import os
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDRectangleFlatButton
 from kivymd.uix.screen import Screen
+import time
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
@@ -23,8 +24,8 @@ class KivyCamera(Image):
     def __init__(self, capture, fps, **kwargs):
         super(KivyCamera, self).__init__(**kwargs)
         self.capture = capture
-        Clock.schedule_interval(self.update, 1.0 / fps)
-
+        self.event = Clock.schedule_interval(self.update, 1.0 / fps)
+        
     def update(self, dt):
 
         ret, frame = self.capture.read()
@@ -59,7 +60,9 @@ class KivyCamera(Image):
             # display image from the texture
             self.texture = image_texture
 
-
+    def stop(self):
+        Clock.unschedule(self.event)
+        
 class CamApp(MDApp):
     def build(self):
         self.capture = cv2.VideoCapture(0)
