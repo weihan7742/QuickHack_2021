@@ -64,12 +64,5 @@ class iKnowU(MDApp):
     def stop_facial(self):
         self.cam_app.my_camera.stop()
 
-
-
-
-
-
-
-
 if __name__ == "__main__":
     iKnowU().run()

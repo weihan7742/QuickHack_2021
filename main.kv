@@ -113,9 +113,6 @@ ScreenManager:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
 
-
-
-
 # User inputs names they want to remember
 <RememberScreen>:
     name: 'remember'
@@ -141,6 +138,7 @@ ScreenManager:
         size_hint: (0.75, 0.1)
         mode: "rectangle"
         halign: "center"
+
     MDTextField:
         hint_text:"Enter their relationship to you"
         pos_hint: {'center_x': 0.5, 'y':0.375}
@@ -161,6 +159,16 @@ ScreenManager:
             root.manager.transition.direction = 'right'
 
     MDRaisedButton:
+        text: "See"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+        on_press:
+            app.load_facial()
+
+    MDRaisedButton:
         text: "Save"
         font_size: "30sp"
         font_name: 'fonts/Lato-Regular.ttf'
@@ -175,26 +183,6 @@ ScreenManager:
 <RecogniseScreen>:
     name: "recognise"
     orientation: "vertical"
-    MDRaisedButton:
-        text: "Camera"
-        font_size: "30sp"
-        font_name: 'fonts/Lato-Regular.ttf'
-        md_bg_color: [151/255, 236/255,248/255,1]
-        elevation: 10
-        pos_hint: {"center_x":0.75, "center_y":0.1}
-        on_press:
-            app.load_facial()
-
-    MDRaisedButton:
-        text: "Stop"
-        font_size: "30sp"
-        font_name: 'fonts/Lato-Regular.ttf'
-        md_bg_color: [151/255, 236/255,248/255,1]
-        elevation: 10
-        pos_hint: {"center_x":0.75, "center_y":0.1}
-        on_press:
-            app.stop_facial()
-
     MDRaisedButton:
         text: "Take A Picture"
         font_size: "30sp"
@@ -250,6 +238,4 @@ ScreenManager:
             root.manager.transition.direction = 'right'
 
     # if time allows do call button for caregiver contact
-
-
 

@@ -28,6 +28,10 @@ class KivyCamera(Image):
         
     def update(self, dt):
 
+        if cv2.waitKey(20) & 0xFF == ord('q'):
+            self.capture.release()
+            cv2.destroyAllWindows()
+            
         ret, frame = self.capture.read()
         if ret:
             faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_alt2.xml')
@@ -60,9 +64,6 @@ class KivyCamera(Image):
             # display image from the texture
             self.texture = image_texture
 
-    def stop(self):
-        Clock.unschedule(self.event)
-        
 class CamApp(MDApp):
     def build(self):
         self.capture = cv2.VideoCapture(0)
