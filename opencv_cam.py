@@ -65,32 +65,7 @@ class CamApp(MDApp):
         self.capture = cv2.VideoCapture(0)
         self.my_camera = KivyCamera(capture=self.capture, fps=30)
 
-        # Button which triggers the "take photo" function
-        button_obj = MDRectangleFlatButton(text="Camera",pos_hint={'center_x': 0.5, 'center_y': 0.5})
-        button_obj.bind(on_press=self.take_selfie)
-
-        # Input box to retrieve name
-        self.description = MDTextField(text="Enter name",pos_hint={'center_x':0.5,'center_y':0.8},size_hint_x=None,width=300,on_release=self.take_selfie)
-
-        layout = Screen()
-        layout.add_widget(self.my_camera)
-        layout.add_widget(button_obj)
-        layout.add_widget(self.description)
-
-        return layout
-
-    def take_selfie(self,*args):
-        pic_name = self.description.text+".png"
-        self.my_camera.export_to_png(pic_name)
-        self.move_dir(pic_name)
-
-    def move_dir(self,pic_name):
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        test_dir = os.path.join(BASE_DIR, r"images\test")
-
-        og_pic_dir = os.path.join(BASE_DIR,pic_name)
-        new_pic_dir = os.path.join(test_dir,pic_name)
-        os.rename(og_pic_dir, new_pic_dir)
+        return self.my_camera
 
     def on_stop(self):
         #without this, app will not exit even if the window is closed
