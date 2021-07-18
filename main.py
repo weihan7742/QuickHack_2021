@@ -14,6 +14,7 @@ from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
 class WelcomeScreen(Screen):
     pass
 
+
 class ProfileScreen(Screen):
     pass
 
@@ -34,7 +35,7 @@ class iKnowU(MDApp):
 
     def popup_msg(self):
         if not self.dialog:
-            self.dialog = MDDialog(text="Your changes have been saved.",
+            self.dialog = MDDialog(text="This person has been saved.",
                                    buttons = [
                                        MDRectangleFlatButton(text="Close", on_press=self.close_popup)])
         self.dialog.open()

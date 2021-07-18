@@ -59,7 +59,7 @@ ScreenManager:
         md_bg_color: [151/255, 236/255,248/255,1]
 
     MDFlatButton:
-        text: "Remember this"
+        text: "Remember \nthis person"
         halign: "center"
         font_size: "25sp"
         font_name: 'fonts/Lato-Regular.ttf'
@@ -115,8 +115,6 @@ ScreenManager:
         elevation: 5
         md_bg_color: [1,1,1,1]
 
-    MD
-
 
 <RememberScreen>:
     name: 'remember'
@@ -126,7 +124,7 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.1}
     
     MDLabel:
-        text: "What was this moment like?"
+        text: "Who is this person?"
         font_size: "25sp"
         font_name: 'fonts/Lato-Regular.ttf'
         text_color: [52/255, 53/255, 84/255, 1]
@@ -135,7 +133,7 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.5}
     
     MDTextField:
-        hint_text:"Enter a description"
+        hint_text:"Enter their name"
         multiline: True
         pos_hint: {'center_x': 0.5, 'y':0.225}
         size_hint: (0.75, 0.25)
@@ -167,6 +165,7 @@ ScreenManager:
 
 
     # if time allows do call button for caregiver contact
+
 
 
 
