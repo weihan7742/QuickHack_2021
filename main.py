@@ -1,5 +1,3 @@
-# Creating a Login Page
-
 # Creating the App
 
 from kivymd.app import MDApp
@@ -10,15 +8,24 @@ from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
 from kivy.uix.camera import Camera
 
 
+from kivymd.uix.button import MDRectangleFlatButton
+from kivy.uix.camera import Camera
 
 # declare screens
+class PreLoadScreen(Screen):
+    pass
+
 class WelcomeScreen(Screen):
     pass
+
 
 class ProfileScreen(Screen):
     pass
 
 class RememberScreen(Screen):
+    pass
+
+class RecogniseScreen(Screen):
     pass
 
 class ScreenManager(ScreenManager):
@@ -41,7 +48,7 @@ class iKnowU(MDApp):
 
     def popup_msg(self):
         if not self.dialog:
-            self.dialog = MDDialog(text="Your changes have been saved.",
+            self.dialog = MDDialog(text="This person has been saved.",
                                    buttons = [
                                        MDRectangleFlatButton(text="Close", on_press=self.close_popup)])
         self.dialog.open()

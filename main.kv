@@ -6,8 +6,10 @@ ScreenManager:
     ProfileScreen:
     RememberScreen:
     CameraClickScreen:
+    RecogniseScreen:
 
-# What user sees when app is launched
+
+# Menu selection for user
 <WelcomeScreen>:
     name: 'welcome'
     MDCard:
@@ -19,7 +21,7 @@ ScreenManager:
     MDLabel:
         text: "Welcome!"
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         pos_hint: {"center_x":0.8, "center_y":0.95}
 
     MDCard:
@@ -48,8 +50,12 @@ ScreenManager:
     MDFlatButton:
         text: "Who Are They?"
         font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.5}
+        on_press:
+            root.manager.current = "recognise"
+            root.manager.transition.direction = 'left'
 
     MDCard:
         size_hint: None, None
@@ -59,9 +65,10 @@ ScreenManager:
         md_bg_color: [151/255, 236/255,248/255,1]
 
     MDFlatButton:
-        text: "Remember this"
+        text: "Remember \nthis person"
         halign: "center"
         font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press:
@@ -80,25 +87,25 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.5}
 
     MDLabel:
-        text: "About Myself:"
+        text: "About Myself"
         bold: True
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Bold.ttf'
         pos_hint: {"center_x":0.8, "center_y":0.95}
 
 
     MDLabel:
-        text: "My Name:\n\n\n\n My Age: \n\n\n\n My Address:"
+        text: "My Name: Ian Teo\n\n\n\n My Age:63 \n\n\n\n My Address: \nA14-1, Some Street, \nA City, Malaysia"
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         halign: "center"
         valign: "top"
         pos_hint: {"center_x":0.5, "center_y":0.6}
 
     MDRaisedButton:
-        text: "Back to Menu"
+        text: "Menu"
         font_size: "30sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [245/255, 241/255, 129/255, 1]
         elevation: 10
         pos_hint: {"center_x":0.5, "center_y":0.07}
@@ -106,40 +113,39 @@ ScreenManager:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
 
-<PopUpScreen>:
-    MDCard:
-        size_hint: None, None
-        size: 220, 120
-        pos_hint: {"center_x":0.5, "center_y":0.2}
-        elevation: 5
-        md_bg_color: [1,1,1,1]
 
-    MD
 
+
+# User inputs names they want to remember
 <RememberScreen>:
     name: 'remember'
+    Image:
+        source:
+        size: self.texture_size
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+
 
     MDLabel:
-        text: "What was this moment like?"
+        text: "Who is this person?"
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         text_color: [52/255, 53/255, 84/255, 1]
         halign: "center"
         valign: "top"
         pos_hint: {"center_x":0.5, "center_y":0.5}
-    
+
     MDTextField:
-        hint_text:"Enter a description"
+        hint_text:"Enter their name"
+        pos_hint: {'center_x': 0.5, 'y':0.3}
         multiline: True
-        pos_hint: {'center_x': 0.5, 'y':0.225}
-        size_hint: (0.75, 0.25)
+        size_hint: (0.75, 0.1)
         mode: "rectangle"
         halign: "center"
-            
+
     MDRaisedButton:
         text: "Menu"
         font_size: "30sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
         pos_hint: {"center_x":0.25, "center_y":0.1}
@@ -150,12 +156,21 @@ ScreenManager:
     MDRaisedButton:
         text: "Save"
         font_size: "30sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
         pos_hint: {"center_x":0.75, "center_y":0.1}
         on_press:
             app.popup_msg()
+
+
+# When user doesn't recognise a person, use this feature to do facial recognition to check
+<RecogniseScreen>:
+    name: "recognise"
+    orientation: "vertical"
+    Camera:
+        id: camera
+        resolution: (640, 480)
 
     MDRaisedButton:
         text: "Take A Picture"
@@ -167,7 +182,7 @@ ScreenManager:
         on_press:
             root.manager.current = "camera"
             root.manager.transition.direction = 'right'
-        
+
 <CameraClickScreen>:
     name: "camera"
     orientation: 'vertical'
@@ -190,6 +205,26 @@ ScreenManager:
                 root.capture()
                 root.manager.transition.direction = 'right'
                 root.manager.current = "remember"
+
+    MDLabel:
+        text: "Name: \n\n\n\nRelationship:"
+        font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        text_color: [52/255, 53/255, 84/255, 1]
+        halign: "center"
+        valign: "top"
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+
+    MDRaisedButton:
+        text: "Menu"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+        on_press:
+            root.manager.current = "welcome"
+            root.manager.transition.direction = 'right'
 
 
     # if time allows do call button for caregiver contact

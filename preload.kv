@@ -1,0 +1,22 @@
+# Loading page when app is first launched
+<PreLoadScreen>:
+    name: 'preload'
+    MDCard:
+        size_hint: None, None
+        size: 350, 600
+        md_bg_color: [1,1,1,1]
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+
+    Image:
+        source: "iKnowU.jpg"
+        size: 350, 200
+        pos_hint: {"center_x":0.5, "center_y":0.6}
+        size_hint_y: None
+        allow_stretch: True
+
+    MDLabel:
+        text: "Loading..."
+        font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        halign: "center"
+        pos_hint: {"center_x":0.5, "center_y":0.2}
