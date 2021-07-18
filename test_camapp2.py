@@ -5,8 +5,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.screen import Screen
 from kivy.uix.button import Button
 from kivymd.uix.textfield import MDTextField
+from kivymd.uix.button import MDRectangleFlatButton
 import os
-
 """
 TODO
 1. Move selfie photo to specific directory - DONE
@@ -23,10 +23,11 @@ class SelfieCameraApp(MDApp):
         self.camera_obj.resolution = (800,800)
 
         # Button which triggers the "take photo" function
-        button_obj = Button(text="Click Here")
-        button_obj.size_hint = (0.5,0.2)
-        button_obj.pos_hint = {'x':.25, 'y': .25}
+        button_obj = MDRectangleFlatButton(text="Camera",pos_hint={'center_x': 0.5, 'center_y': 0.5})
         button_obj.bind(on_press=self.take_selfie)
+
+        # Input box to retrieve name
+        self.name = MDTextField(text="Enter name",pos_hint={'center_x':0.5,'center_y':0.5},size_hint_x=None,)
 
         # Box Layout
         layout = Screen()
