@@ -5,8 +5,10 @@ ScreenManager:
     WelcomeScreen:
     ProfileScreen:
     RememberScreen:
+    RecogniseScreen:
 
-# What user sees when app is launched
+
+# Menu selection for user
 <WelcomeScreen>:
     name: 'welcome'
     MDCard:
@@ -50,6 +52,9 @@ ScreenManager:
         font_name: 'fonts/Lato-Regular.ttf'
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.5}
+        on_press:
+            root.manager.current = "recognise"
+            root.manager.transition.direction = 'left'
 
     MDCard:
         size_hint: None, None
@@ -116,13 +121,15 @@ ScreenManager:
         md_bg_color: [1,1,1,1]
 
 
+
+# User inputs names they want to remember
 <RememberScreen>:
     name: 'remember'
     Image:
-        source: 
+        source:
         size: self.texture_size
         pos_hint: {"center_x":0.5, "center_y":0.1}
-    
+
     MDLabel:
         text: "Who is this person?"
         font_size: "25sp"
@@ -131,7 +138,7 @@ ScreenManager:
         halign: "center"
         valign: "top"
         pos_hint: {"center_x":0.5, "center_y":0.5}
-    
+
     MDTextField:
         hint_text:"Enter their name"
         multiline: True
@@ -139,7 +146,7 @@ ScreenManager:
         size_hint: (0.75, 0.25)
         mode: "rectangle"
         halign: "center"
-            
+
     MDRaisedButton:
         text: "Menu"
         font_size: "30sp"
@@ -160,8 +167,35 @@ ScreenManager:
         pos_hint: {"center_x":0.75, "center_y":0.1}
         on_press:
             app.popup_msg()
-        
 
+
+# When user doesn't recognise a person, use this feature to do facial recognition to check
+<RecogniseScreen>:
+    name: "recognise"
+    Image:
+        source:
+        size: self.texture_size
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+
+    MDLabel:
+        text: "Name: \n\n\n\nRelationship:"
+        font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        text_color: [52/255, 53/255, 84/255, 1]
+        halign: "center"
+        valign: "top"
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+
+    MDRaisedButton:
+        text: "Menu"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+        on_press:
+            root.manager.current = "welcome"
+            root.manager.transition.direction = 'right'
 
 
     # if time allows do call button for caregiver contact
