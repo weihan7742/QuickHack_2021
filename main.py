@@ -14,6 +14,9 @@ class WelcomeScreen(Screen):
 class ProfileScreen(Screen):
     pass
 
+class RememberScreen(Screen):
+    pass
+
 class ScreenManager(ScreenManager):
     pass
 

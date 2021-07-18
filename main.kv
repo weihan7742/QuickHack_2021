@@ -3,6 +3,7 @@
 ScreenManager:
     WelcomeScreen:
     ProfileScreen:
+    RememberScreen:
 
 <WelcomeScreen>:
     name: 'welcome'
@@ -52,6 +53,7 @@ ScreenManager:
         font_size: "25sp"
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
+        on_press: root.manager.current = "remember"
 
 <ProfileScreen>:
     name: 'profile'
@@ -62,3 +64,9 @@ ScreenManager:
         font_size: "25sp"
         font_name: "Roboto"
         pos_hint: {"center_x":0.8, "center_y":0.95}
+
+<RememberScreen>:
+    name: 'remember'
+
+    MDLabel:
+        text:"Hi"
