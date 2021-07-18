@@ -125,11 +125,10 @@ ScreenManager:
         font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
-        pos_hint: {"center_x":0.5, "center_y":0.5}
+        pos_hint: {"center_x":0.5, "center_y":0.85}
         on_press:
             root.manager.current = "camera"
             root.manager.transition.direction = 'left'
-
 
     MDLabel:
         text: "Who is this person?"
