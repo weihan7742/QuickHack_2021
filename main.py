@@ -20,11 +20,10 @@ class ProfileScreen(Screen):
 class RememberScreen(Screen):
     pass
 
-
 class ScreenManager(ScreenManager):
     pass
 
-
+# App class
 class iKnowU(MDApp):
 
     dialog = None
@@ -42,6 +41,7 @@ class iKnowU(MDApp):
 
     def close_popup(self,obj):
         self.dialog.dismiss()
+
 
 if __name__ == "__main__":
     iKnowU().run()

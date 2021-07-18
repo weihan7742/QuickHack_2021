@@ -63,7 +63,10 @@ ScreenManager:
         font_size: "25sp"
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
-        on_press: root.manager.current = "remember"
+        on_press:
+            root.manager.current = "remember"
+            root.manager.transition.direction = 'left'
+
 
 
 # Shows the information of the user
@@ -100,7 +103,7 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.07}
         on_press:
             root.manager.current = "welcome"
-            root.manager.transition.direction = 'left'
+            root.manager.transition.direction = 'right'
 
 <PopUpScreen>:
     MDCard:
@@ -138,7 +141,7 @@ ScreenManager:
         halign: "center"
             
     MDRaisedButton:
-        text: "Menu"
+        text: "Back to Menu"
         font_size: "30sp"
         font_name: "Roboto"
         md_bg_color: [151/255, 236/255,248/255,1]
