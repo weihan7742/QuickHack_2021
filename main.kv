@@ -140,6 +140,7 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.5}
 
     MDTextField:
+        id: name
         hint_text:"Enter their name"
         pos_hint: {'center_x': 0.5, 'y':0.3}
         multiline: True
@@ -147,6 +148,7 @@ ScreenManager:
         mode: "rectangle"
         halign: "center"
     MDTextField:
+        id: relationship
         hint_text:"Enter their relationship to you"
         pos_hint: {'center_x': 0.5, 'y':0.375}
         multiline: True
@@ -173,6 +175,7 @@ ScreenManager:
         elevation: 10
         pos_hint: {"center_x":0.75, "center_y":0.1}
         on_press:
+            app.save_image(name.text, relationship.text)
             app.popup_msg()
 
 
