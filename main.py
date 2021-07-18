@@ -1,16 +1,15 @@
-# Creating a Login Page
-
 # Creating the App
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
-
-
+from kivymd.uix.button import MDRectangleFlatButton
 
 # declare screens
+class PreLoadScreen(Screen):
+    pass
+
 class WelcomeScreen(Screen):
     pass
 
@@ -20,8 +19,12 @@ class ProfileScreen(Screen):
 class RememberScreen(Screen):
     pass
 
+class RecogniseScreen(Screen):
+    pass
+
 class ScreenManager(ScreenManager):
     pass
+
 
 # App class
 class iKnowU(MDApp):
