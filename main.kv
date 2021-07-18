@@ -1,7 +1,11 @@
-# Creating the Screen
+# Creating the Welcome Screen
 
-MDScreen:
-    md_bg_color : [1,1,1,1]
+ScreenManager:
+    WelcomeScreen:
+    ProfileScreen:
+
+<WelcomeScreen>:
+    name: 'welcome'
     MDLabel:
         text: "Welcome!"
         font_size: "25sp"
@@ -20,6 +24,7 @@ MDScreen:
         font_size: "25sp"
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.8}
+        on_press: root.manager.current = "profile"
 
     MDCard:
         size_hint: None, None
@@ -47,3 +52,13 @@ MDScreen:
         font_size: "25sp"
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
+
+<ProfileScreen>:
+    name: 'profile'
+    md_bg_color : [1,1,1,1]
+
+    MDLabel:
+        text: "This is your Profile:"
+        font_size: "25sp"
+        font_name: "Roboto"
+        pos_hint: {"center_x":0.8, "center_y":0.95}
