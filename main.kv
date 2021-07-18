@@ -5,6 +5,7 @@ ScreenManager:
     WelcomeScreen:
     ProfileScreen:
     RememberScreen:
+    CameraClickScreen:
 
 # What user sees when app is launched
 <WelcomeScreen>:
@@ -115,14 +116,9 @@ ScreenManager:
 
     MD
 
-
 <RememberScreen>:
     name: 'remember'
-    Image:
-        source: 
-        size: self.texture_size
-        pos_hint: {"center_x":0.5, "center_y":0.1}
-    
+
     MDLabel:
         text: "What was this moment like?"
         font_size: "25sp"
@@ -160,8 +156,40 @@ ScreenManager:
         pos_hint: {"center_x":0.75, "center_y":0.1}
         on_press:
             app.popup_msg()
-        
 
+    MDRaisedButton:
+        text: "Take A Picture"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.25, "center_y":0.1}
+        on_press:
+            root.manager.current = "camera"
+            root.manager.transition.direction = 'right'
+        
+<CameraClickScreen>:
+    name: "camera"
+    orientation: 'vertical'
+    GridLayout:
+        cols: 1
+        Camera:
+            id: camera
+            resolution: (640, 480)
+            play: False
+        ToggleButton:
+            text: 'Play'
+            on_press: camera.play = not camera.play
+            size_hint_y: None
+            height: '48dp'
+        Button:
+            text: 'Capture'
+            size_hint_y: None
+            height: '48dp'
+            on_press:
+                root.capture()
+                root.manager.transition.direction = 'right'
+                root.manager.current = "remember"
 
 
     # if time allows do call button for caregiver contact
