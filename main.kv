@@ -4,6 +4,7 @@
 ScreenManager:
     WelcomeScreen:
     ProfileScreen:
+    RememberScreen:
 
 # What user sees when app is launched
 <WelcomeScreen>:
@@ -17,7 +18,7 @@ ScreenManager:
     MDLabel:
         text: "Welcome!"
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         pos_hint: {"center_x":0.8, "center_y":0.95}
 
     MDCard:
@@ -46,6 +47,7 @@ ScreenManager:
     MDFlatButton:
         text: "Who Are They?"
         font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.5}
 
@@ -60,8 +62,13 @@ ScreenManager:
         text: "Remember this"
         halign: "center"
         font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
+        on_press:
+            root.manager.current = "remember"
+            root.manager.transition.direction = 'left'
+
 
 
 # Shows the information of the user
@@ -77,27 +84,87 @@ ScreenManager:
         text: "About Myself:"
         bold: True
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         pos_hint: {"center_x":0.8, "center_y":0.95}
+
 
     MDLabel:
         text: "My Name:\n\n\n\n My Age: \n\n\n\n My Address:"
         font_size: "25sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         halign: "center"
         valign: "top"
         pos_hint: {"center_x":0.5, "center_y":0.6}
 
     MDRaisedButton:
-        text: "Back to Menu"
+        text: "Menu"
         font_size: "30sp"
-        font_name: "Roboto"
+        font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [245/255, 241/255, 129/255, 1]
         elevation: 10
         pos_hint: {"center_x":0.5, "center_y":0.07}
         on_press:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
+
+<PopUpScreen>:
+    MDCard:
+        size_hint: None, None
+        size: 220, 120
+        pos_hint: {"center_x":0.5, "center_y":0.2}
+        elevation: 5
+        md_bg_color: [1,1,1,1]
+
+    MD
+
+
+<RememberScreen>:
+    name: 'remember'
+    Image:
+        source: 
+        size: self.texture_size
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+    
+    MDLabel:
+        text: "What was this moment like?"
+        font_size: "25sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        text_color: [52/255, 53/255, 84/255, 1]
+        halign: "center"
+        valign: "top"
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+    
+    MDTextField:
+        hint_text:"Enter a description"
+        multiline: True
+        pos_hint: {'center_x': 0.5, 'y':0.225}
+        size_hint: (0.75, 0.25)
+        mode: "rectangle"
+        halign: "center"
+            
+    MDRaisedButton:
+        text: "Menu"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.25, "center_y":0.1}
+        on_press:
+            root.manager.current = "welcome"
+            root.manager.transition.direction = 'right'
+
+    MDRaisedButton:
+        text: "Save"
+        font_size: "30sp"
+        font_name: 'fonts/Lato-Regular.ttf'
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+        on_press:
+            app.popup_msg()
+        
+
+
 
     # if time allows do call button for caregiver contact
 

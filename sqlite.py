@@ -3,47 +3,58 @@ import uuid
 
 def convertToBinaryData(filename):
     # Convert digital data to binary format
-    with open('images/weihan' + filename, 'rb') as file:
+    with open('images/weihan/' + filename, 'rb') as file:
         blobData = file.read()
     return blobData
 
 def writeTofile(data, filename):
     # Convert binary data to proper format and write it on Hard Disk
-    with open('images_database' + filename, 'wb') as file:
+    with open('images_database/' + str(filename) + '.png', 'wb') as file:
         file.write(data)
     print("Stored blob data into: ", filename, "\n")
 
-conn = sql.connect('memory')
+conn = sql.connect('memory.db')
 c = conn.cursor()
-c.execute("""DROP TABLE user""")
-c.execute("""DROP TABLE family""")
+#c.execute("""DROP TABLE user""")
+#c.execute("""DROP TABLE family""")
 
-c.execute("""CREATE TABLE user (
+def create():
+    c.execute("""CREATE TABLE user (
     user_id INTEGER PRIMARY KEY,
     user_fname text,
-    user_lname text)
-""")
+    user_lname text)""")
 
-conn.commit()
+    conn.commit()
 
-c.execute("""CREATE TABLE family (
-    family_id TEXT NOT NULL,
-    family_image blob,
-    family_fname text,
-    family_lname text,
-    user_id text NOT NULL,
-    PRIMARY KEY (family_id, user_id)
-)""")
+    c.execute("""CREATE TABLE family (
+        family_id TEXT NOT NULL,
+        family_fname text,
+        family_lname text,
+        user_id text NOT NULL,
+        PRIMARY KEY (family_id, user_id)
+    )""")
 
-conn.commit()
+    conn.commit()
+
+    c.execute(
+        """CREATE TABLE family_image (
+        family_image_id TEXT NOT NULL,
+        family_image_pic blob,
+        family_id,
+        user_id,
+        PRIMARY KEY (family_image_id, family_id, user_id)
+        )"""
+    )
+
+    conn.commit()
 
 def insert_user(fname, lname):
     try:
-        conn = sql.connect('memory')
+        conn = sql.connect('memory.db')
         c = conn.cursor()
-        insert_blob = """INSERT INTO family VALUES (id, image, fname, lname) VALUES (?, ?, ?, ?)"""
-        new_id = str(uuid.uuid4()).replace('-','')
-        data = (new_id, fname, lname)
+        insert_blob = """INSERT INTO user (user_id, user_fname, user_lname) VALUES (?, ?, ?)"""
+        #new_id = str(uuid.uuid4()).replace('-','')
+        data = ('1234', fname, lname)
         c.execute(insert_blob, data)
         print('Sucessful')
         conn.commit()
@@ -53,12 +64,26 @@ def insert_user(fname, lname):
 
 def insert_family(id, image, fname, lname):
     try:
-        conn = sql.connect('memory')
+        conn = sql.connect('memory.db')
         c = conn.cursor()
-        insert_blob = """INSERT INTO family VALUES (id, image, fname, lname) VALUES (?, ?, ?, ?)"""
+        insert_blob = """INSERT INTO family (family_id, family_fname, family_lname, user_id) VALUES (?, ?, ?, ?, ?)"""
         new_id = str(uuid.uuid4()).replace('-','')
+        data = (new_id, fname, lname, id)
+        c.execute(insert_blob, data)
+        print('Sucessful')
+        conn.commit()
+        insert_image(new_id, id, image)
+    except sql.Error as error:
+        print("Failed to insert blob data into sqlite table", error)
+
+def insert_image(family_id, user_id, image):
+    try:
+        conn = sql.connect('memory.db')
+        c = conn.cursor()
+        insert_blob = """INSERT INTO family_image (family_image_id, family_image_pic, family_id, user_id) VALUES (?, ?, ?, ?)"""
+        new_id = str(uuid.uuid4()).replace('-', '')
         image = convertToBinaryData(image)
-        data = (new_id, image, fname, lname, id)
+        data = (new_id, image, family_id, user_id)
         c.execute(insert_blob, data)
         print('Sucessful')
         conn.commit()
@@ -67,23 +92,25 @@ def insert_family(id, image, fname, lname):
 
 #Assume names are unique
 def get_user_id(gname, fname):
-    conn = sql.connect('memory')
+    conn = sql.connect('memory.db')
     c = conn.cursor()
     query = """SELECT user_id from user where user_fname = ? and user_lname = ?"""
-    c.execute(query, (gname, fname, ))
+    #query = """SELECT * from user"""
+    #c.execute(query)
+    c.execute(query, (gname, fname))
     rows = c.fetchall()
     for row in rows:
         print(row)
-        return row
+        return row[0]
 
-def get_image(id):
-    conn = sql.connect('memory')
+def get_image(user_id, family_id):
+    conn = sql.connect('memory.db')
     c = conn.cursor()
-    query = """select family_image from family where user_id = ?"""
-    c.execute(query, (id))
+    query = """select family_image_pic from family_image where user_id = ? and family_id = ?"""
+    c.execute(query, (user_id, family_id))
     records = c.fetchall()
-    records = records[0]
-    writeTofile(records, id)
+    records = records[0][0]
+    writeTofile(records, family_id)
     return records
 
 conn.commit()
