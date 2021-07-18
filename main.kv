@@ -1,4 +1,4 @@
-# Creating the Welcome Screen
+# Creating the Screens
 
 ScreenManager:
     WelcomeScreen:
@@ -7,6 +7,9 @@ ScreenManager:
 
 <WelcomeScreen>:
     name: 'welcome'
+    MDCard:
+        md_bg_color: [1,1,1,1]
+
     MDLabel:
         text: "Welcome!"
         font_size: "25sp"
@@ -25,7 +28,9 @@ ScreenManager:
         font_size: "25sp"
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.8}
-        on_press: root.manager.current = "profile"
+        on_press:
+            root.manager.current = "profile"
+            root.manager.transition.direction = 'left'
 
     MDCard:
         size_hint: None, None
@@ -57,10 +62,15 @@ ScreenManager:
 
 <ProfileScreen>:
     name: 'profile'
-    md_bg_color : [1,1,1,1]
+    MDCard:
+        size_hint: None, None
+        size: 350, 800
+        md_bg_color: [255/255,254/255,223/255,1]
+        pos_hint: {"center_x":0.5, "center_y":0.5}
 
     MDLabel:
-        text: "This is your Profile:"
+        text: "About Myself:"
+        bold: True
         font_size: "25sp"
         font_name: "Roboto"
         pos_hint: {"center_x":0.8, "center_y":0.95}
@@ -70,3 +80,24 @@ ScreenManager:
 
     MDLabel:
         text:"Hi"
+        pos_hint: {"center_x":0.8, "center_y":0.85}
+
+    MDLabel:
+        text: "My Name:\n\n\n\n My Age: \n\n\n\n My Address:"
+        font_size: "25sp"
+        font_name: "Roboto"
+        halign: "center"
+
+    MDRaisedButton:
+        text: "Back to Menu"
+        font_size: "25sp"
+        md_bg_color: [245/255, 241/255, 129/255, 1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.07}
+        on_press:
+            root.manager.current = "welcome"
+            root.manager.transition.direction = 'right'
+
+
+
+

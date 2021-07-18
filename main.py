@@ -4,7 +4,7 @@
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import Screen, ScreenManager
 
 
 # declare screens
@@ -22,6 +22,7 @@ class ScreenManager(ScreenManager):
 
 
 class iKnowU(MDApp):
+
     def build(self):
         buildkv = Builder.load_file("main.kv")
         return buildkv
