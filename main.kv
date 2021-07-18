@@ -104,29 +104,35 @@ ScreenManager:
 
 <RememberScreen>:
     name: 'remember'
+    Image:
+        source: 
+        size: self.texture_size
+        pos_hint: {"center_x":0.5, "center_y":0.1}
+    
     MDLabel:
         text: "What was this moment like?"
         font_size: "25sp"
         font_name: "Roboto"
+        text_color: [52/255, 53/255, 84/255, 1]
         halign: "center"
         valign: "top"
-        pos_hint: {"center_x":0.5, "center_y":0.6}
+        pos_hint: {"center_x":0.5, "center_y":0.5}
     
     MDTextField:
         hint_text:"Enter a description"
         multiline: True
-        pos_hint: {'center_x': 0.5, 'y':0.15}
-        size_hint: (0.5, 0.25)
+        pos_hint: {'center_x': 0.5, 'y':0.225}
+        size_hint: (0.75, 0.25)
         mode: "rectangle"
         halign: "center"
             
     MDRaisedButton:
-        text: "Back to Menu"
+        text: "Menu"
         font_size: "30sp"
         font_name: "Roboto"
-        md_bg_color: [197/255, 240/255, 229/255, 1]
+        md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
-        pos_hint: {"center_x":0.5, "center_y":0.07}
+        pos_hint: {"center_x":0.25, "center_y":0.1}
         on_press:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
@@ -135,10 +141,10 @@ ScreenManager:
         text: "Save"
         font_size: "30sp"
         font_name: "Roboto"
-        md_bg_color: [197/255, 242/255, 229/255, 1]
+        md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
-        pos_hint: {"center_x":0.5, "center_y":0.2}
-        on_press:
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+        
 
 
 
