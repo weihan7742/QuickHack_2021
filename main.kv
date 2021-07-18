@@ -1,13 +1,18 @@
 # Creating the Screens
 
+# Screen management
 ScreenManager:
     WelcomeScreen:
     ProfileScreen:
 
+# What user sees when app is launched
 <WelcomeScreen>:
     name: 'welcome'
     MDCard:
+        size_hint: None, None
+        size: 350, 600
         md_bg_color: [1,1,1,1]
+        pos_hint: {"center_x":0.5, "center_y":0.5}
 
     MDLabel:
         text: "Welcome!"
@@ -58,11 +63,13 @@ ScreenManager:
         text_color: [29/255, 74/255, 84/255, 1]
         pos_hint: {"center_x":0.5, "center_y":0.2}
 
+
+# Shows the information of the user
 <ProfileScreen>:
     name: 'profile'
     MDCard:
         size_hint: None, None
-        size: 350, 800
+        size: 350, 600
         md_bg_color: [255/255,254/255,223/255,1]
         pos_hint: {"center_x":0.5, "center_y":0.5}
 
@@ -71,7 +78,7 @@ ScreenManager:
         bold: True
         font_size: "25sp"
         font_name: "Roboto"
-        pos_hint: {"center_x":0.8, "center_y":0.85}
+        pos_hint: {"center_x":0.8, "center_y":0.95}
 
     MDLabel:
         text: "My Name:\n\n\n\n My Age: \n\n\n\n My Address:"
@@ -82,6 +89,7 @@ ScreenManager:
     MDRaisedButton:
         text: "Back to Menu"
         font_size: "25sp"
+        font_name: "Roboto"
         md_bg_color: [245/255, 241/255, 129/255, 1]
         elevation: 10
         pos_hint: {"center_x":0.5, "center_y":0.07}
@@ -89,6 +97,7 @@ ScreenManager:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
 
+    # if time allows do call button for caregiver contact
 
 
 
