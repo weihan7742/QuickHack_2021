@@ -4,6 +4,10 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
+from kivy.uix.camera import Camera
+
+
 from kivymd.uix.button import MDRectangleFlatButton
 from kivy.uix.camera import Camera
 from opencv_cam import CamApp
@@ -28,6 +32,11 @@ class RecogniseScreen(Screen):
 class ScreenManager(ScreenManager):
     pass
 
+class CameraClickScreen(Screen):
+    def capture(self):
+        camera = self.ids['camera']
+        camera.export_to_png("IMG_{}.png")
+        print("Captured")
 
 # App class
 class iKnowU(MDApp):
@@ -55,8 +64,12 @@ class iKnowU(MDApp):
     def stop_facial(self):
         self.cam_app.my_camera.stop()
 
+
+
+
+
+
+
+
 if __name__ == "__main__":
     iKnowU().run()
-
-
-

@@ -40,6 +40,7 @@ def create():
         """CREATE TABLE family_image (
         family_image_id TEXT NOT NULL,
         family_image_pic blob,
+        family_image_descript,
         family_id,
         user_id,
         PRIMARY KEY (family_image_id, family_id, user_id)
@@ -72,18 +73,18 @@ def insert_family(id, image, fname, lname):
         c.execute(insert_blob, data)
         print('Sucessful')
         conn.commit()
-        insert_image(new_id, id, image)
+        insert_image(new_id, id, image, 'first')
     except sql.Error as error:
         print("Failed to insert blob data into sqlite table", error)
 
-def insert_image(family_id, user_id, image):
+def insert_image(family_id, user_id, image, description):
     try:
         conn = sql.connect('memory.db')
         c = conn.cursor()
-        insert_blob = """INSERT INTO family_image (family_image_id, family_image_pic, family_id, user_id) VALUES (?, ?, ?, ?)"""
+        insert_blob = """INSERT INTO family_image (family_image_id, family_image_pic, description, family_id, user_id) VALUES (?, ?, ?, ?)"""
         new_id = str(uuid.uuid4()).replace('-', '')
         image = convertToBinaryData(image)
-        data = (new_id, image, family_id, user_id)
+        data = (new_id, image, description, family_id, user_id)
         c.execute(insert_blob, data)
         print('Sucessful')
         conn.commit()
@@ -103,10 +104,22 @@ def get_user_id(gname, fname):
         print(row)
         return row[0]
 
+def get_family_id(gname, fname, user_id):
+    conn = sql.connect('memory.db')
+    c = conn.cursor()
+    query = """SELECT family_id from user where family_fname = ? and family_lname = ? and user_id = ?"""
+    #query = """SELECT * from user"""
+    #c.execute(query)
+    c.execute(query, (gname, fname), user_id)
+    rows = c.fetchall()
+    for row in rows:
+        print(row)
+        return row[0]
+
 def get_image(user_id, family_id):
     conn = sql.connect('memory.db')
     c = conn.cursor()
-    query = """select family_image_pic from family_image where user_id = ? and family_id = ?"""
+    query = """select family_image_pic, family_image_description from family_image where user_id = ? and family_id = ?"""
     c.execute(query, (user_id, family_id))
     records = c.fetchall()
     records = records[0][0]

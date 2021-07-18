@@ -5,6 +5,7 @@ ScreenManager:
     WelcomeScreen:
     ProfileScreen:
     RememberScreen:
+    CameraClickScreen:
     RecogniseScreen:
 
 
@@ -123,6 +124,7 @@ ScreenManager:
         size: self.texture_size
         pos_hint: {"center_x":0.5, "center_y":0.1}
 
+
     MDLabel:
         text: "Who is this person?"
         font_size: "25sp"
@@ -135,6 +137,13 @@ ScreenManager:
     MDTextField:
         hint_text:"Enter their name"
         pos_hint: {'center_x': 0.5, 'y':0.3}
+        multiline: True
+        size_hint: (0.75, 0.1)
+        mode: "rectangle"
+        halign: "center"
+    MDTextField:
+        hint_text:"Enter their relationship to you"
+        pos_hint: {'center_x': 0.5, 'y':0.375}
         multiline: True
         size_hint: (0.75, 0.1)
         mode: "rectangle"
@@ -186,6 +195,40 @@ ScreenManager:
         on_press:
             app.stop_facial()
 
+    MDRaisedButton:
+        text: "Take A Picture"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.25, "center_y":0.1}
+        on_press:
+            root.manager.current = "camera"
+            root.manager.transition.direction = 'right'
+
+<CameraClickScreen>:
+    name: "camera"
+    orientation: 'vertical'
+    GridLayout:
+        cols: 1
+        Camera:
+            id: camera
+            resolution: (640, 480)
+            play: False
+        ToggleButton:
+            text: 'Play'
+            on_press: camera.play = not camera.play
+            size_hint_y: None
+            height: '48dp'
+        Button:
+            text: 'Capture'
+            size_hint_y: None
+            height: '48dp'
+            on_press:
+                root.capture()
+                root.manager.transition.direction = 'right'
+                root.manager.current = "remember"
+
     MDLabel:
         text: "Name: \n\n\n\nRelationship:"
         font_size: "25sp"
@@ -207,7 +250,6 @@ ScreenManager:
             root.manager.transition.direction = 'right'
 
     # if time allows do call button for caregiver contact
-
 
 
 
