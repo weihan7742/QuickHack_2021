@@ -112,13 +112,6 @@ ScreenManager:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
 
-<PopUpScreen>:
-    MDCard:
-        size_hint: None, None
-        size: 220, 120
-        pos_hint: {"center_x":0.5, "center_y":0.2}
-        elevation: 5
-        md_bg_color: [1,1,1,1]
 
 
 
@@ -172,10 +165,10 @@ ScreenManager:
 # When user doesn't recognise a person, use this feature to do facial recognition to check
 <RecogniseScreen>:
     name: "recognise"
-    Image:
-        source:
-        size: self.texture_size
-        pos_hint: {"center_x":0.5, "center_y":0.1}
+    orientation: "vertical"
+    Camera:
+        id: camera
+        resolution: (640, 480)
 
     MDLabel:
         text: "Name: \n\n\n\nRelationship:"

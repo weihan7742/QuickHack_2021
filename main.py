@@ -5,6 +5,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRectangleFlatButton
+from kivy.uix.camera import Camera
 
 # declare screens
 class PreLoadScreen(Screen):
@@ -49,3 +50,6 @@ class iKnowU(MDApp):
 
 if __name__ == "__main__":
     iKnowU().run()
+
+
+
