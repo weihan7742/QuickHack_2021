@@ -104,19 +104,26 @@ ScreenManager:
 
 <RememberScreen>:
     name: 'remember'
+    MDLabel:
+        text: "What was this moment like?"
+        font_size: "25sp"
+        font_name: "Roboto"
+        halign: "center"
+        valign: "top"
+        pos_hint: {"center_x":0.5, "center_y":0.6}
     
     MDTextField:
         hint_text:"Enter a description"
         multiline: True
-        pos_hint: {'center_x': 0.5, 'y':0.5}
-        size_hint: (0.5, 0.5)
+        pos_hint: {'center_x': 0.5, 'y':0.15}
+        size_hint: (0.5, 0.25)
         mode: "rectangle"
         halign: "center"
     
-    MDFillRoundFlatButton:
+    MDRaisedButton:
         text: "Save"
-        pos_hint: {'center_x': 0.5, 'center_y':0}
-        size_hint: (0.2, 0.2)
+        pos_hint: {'center_x': 0.5, 'center_y':0.07}
+        size_hint: (0.2, 0.1)
         halign: "center"
             
 
