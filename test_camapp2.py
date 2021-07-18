@@ -10,7 +10,7 @@ import os
 """
 TODO
 1. Move selfie photo to specific directory - DONE
-2. User can input name 
+2. User can input name - Done
 3. Create directory based on user input
 4. Integrate camera app with opencv face recognition
 """
@@ -27,17 +27,25 @@ class SelfieCameraApp(MDApp):
         button_obj.bind(on_press=self.take_selfie)
 
         # Input box to retrieve name
-        self.name = MDTextField(text="Enter name",pos_hint={'center_x':0.5,'center_y':0.5},size_hint_x=None,)
+        self.description = MDTextField(text="Enter name",pos_hint={'center_x':0.5,'center_y':0.8},size_hint_x=None,width=300,on_release=self.take_selfie)
 
         # Box Layout
         layout = Screen()
         layout.add_widget(self.camera_obj)
         layout.add_widget(button_obj)
-        # layout.add_widget(self.some_name)
+        layout.add_widget(self.description)
         return layout
 
     def take_selfie(self,*args):
-        pic_name = "./selfie.png"
+        """
+        If database doesn't work:
+            # Create a directory if not yet exist
+            # Get the #number of files in the directory + 1
+            # Append number to self.description + ".png"
+            # Export to png
+            # Move picture to the directory 
+        """
+        pic_name = self.description.text+".png"
         self.camera_obj.export_to_png(pic_name)
         self.move_dir(pic_name)
     
