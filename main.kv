@@ -75,12 +75,6 @@ ScreenManager:
         font_name: "Roboto"
         pos_hint: {"center_x":0.8, "center_y":0.95}
 
-<RememberScreen>:
-    name: 'remember'
-
-    MDLabel:
-        text:"Hi"
-        pos_hint: {"center_x":0.8, "center_y":0.85}
 
     MDLabel:
         text: "My Name:\n\n\n\n My Age: \n\n\n\n My Address:"
@@ -98,6 +92,25 @@ ScreenManager:
             root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
 
+<RememberScreen>:
+    name: 'remember'
+    
+    MDTextField:
+        hint_text:"Enter a description"
+        multiline: True
+        pos_hint: {'center_x': 0.5, 'y':0.5}
+        size_hint: (0.5, 0.5)
+        mode: "rectangle"
+        halign: "center"
+    
+    MDFillRoundFlatButton:
+        text: "Save"
+        pos_hint: {'center_x': 0.5, 'center_y':0}
+        size_hint: (0.2, 0.2)
+        halign: "center"
+            
+
+    
 
 
 
