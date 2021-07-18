@@ -106,10 +106,10 @@ def get_user_id(gname, fname):
 def get_family_id(gname, fname, user_id):
     conn = sql.connect('memory.db')
     c = conn.cursor()
-    query = """SELECT family_id from user where family_fname = ? and family_lname = ? and user_id = ?"""
+    query = """SELECT family_id from family where family_fname = ? and family_lname = ? and user_id = ?"""
     #query = """SELECT * from user"""
     #c.execute(query)
-    c.execute(query, (gname, fname), user_id)
+    c.execute(query, (gname, fname, user_id))
     rows = c.fetchall()
     for row in rows:
         print(row)

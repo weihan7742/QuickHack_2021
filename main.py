@@ -8,6 +8,8 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
 from kivy.uix.camera import Camera
 from sqlite import *
+import shutil
+import glob
 
 
 from kivymd.uix.button import MDRectangleFlatButton
@@ -36,8 +38,12 @@ class ScreenManager(ScreenManager):
 class CameraClickScreen(Screen):
     def capture(self):
         camera = self.ids['camera']
-        camera.export_to_png("IMG_{}.png")
+        camera.export_to_png("image.png")
+        self.image = "image.png"
         print("Captured")
+
+    def get_image(self):
+        return self.image
 
 # App class
 class iKnowU(MDApp):
@@ -61,27 +67,22 @@ class iKnowU(MDApp):
     def close_popup(self,obj):
         self.dialog.dismiss()
 
-    def load_facial(self):
-        self.cam_app.run()
 
-    def stop_facial(self):
-        self.cam_app.my_camera.stop()
-
-    def capture(self):
-        self.num += 1
-        camera = self.ids['camera']
-        camera.export_to_png("temp_images/IMG_{" + self.num + "}.png")
-        self.image = "temp_images/IMG_{" + self.num + "}.png"
-        print("Captured")
-
-    def save_image(self):
-        if not get_family_id('d', 'n', '1234'):
-            insert_family('1234', self.image, '')
+    def save_image(self, name, relationship):
+        path = "image.png"
+        if not get_family_id(name, '', '1234'):
+            insert_family('1234', "image.png", name, '')
+            os.mkdir("images/" + name + "/")
+            destination = "images/" + name + '/' + name + "_1" + ".png"
+            shutil.move(str(path), destination)
         else:
-            id = get_family_id('1234')
-            insert_image(id, '1234', self.image, )
-
-        os.remove(self.image)
+            list_of_files = glob.glob('/images/' + name + '/*')  # * means all if need specific format then *.csv
+            latest_file = max(list_of_files, key=os.path.getctime)
+            num = int(latest_file[-1])
+            id = get_family_id(name, '', '1234')
+            insert_image(id, '1234', "image.png", relationship)
+            destination = "images/" + name + '/' + name + '/_' + str(num+1) + ".png"
+            shutil.move(str(path), destination)
 
 if __name__ == "__main__":
     iKnowU().run()
