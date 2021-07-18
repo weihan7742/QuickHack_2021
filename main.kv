@@ -112,15 +112,29 @@ ScreenManager:
         size_hint: (0.5, 0.5)
         mode: "rectangle"
         halign: "center"
-    
-    MDFillRoundFlatButton:
-        text: "Save"
-        pos_hint: {'center_x': 0.5, 'center_y':0}
-        size_hint: (0.2, 0.2)
-        halign: "center"
             
+    MDRaisedButton:
+        text: "Back to Menu"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [197/255, 240/255, 229/255, 1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.07}
+        on_press:
+            root.manager.current = "welcome"
+            root.manager.transition.direction = 'right'
 
-    
+    MDRaisedButton:
+        text: "Save"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [197/255, 242/255, 229/255, 1]
+        elevation: 10
+        pos_hint: {"center_x":0.5, "center_y":0.2}
+        on_press:
+
+
+
     # if time allows do call button for caregiver contact
 
 
