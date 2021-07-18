@@ -54,7 +54,6 @@ def insert_user(fname, lname):
         conn = sql.connect('memory.db')
         c = conn.cursor()
         insert_blob = """INSERT INTO user (user_id, user_fname, user_lname) VALUES (?, ?, ?)"""
-        #new_id = str(uuid.uuid4()).replace('-','')
         data = ('1234', fname, lname)
         c.execute(insert_blob, data)
         print('Sucessful')
