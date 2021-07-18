@@ -1,28 +1,11 @@
-from kivy.app import App 
-from kivy.uix.widget import Widget 
-from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen 
+# Creating a Login Page
 
-kv = Builder.load_file('iknow.kv')
+# Creating the App
 
-class WelcomeScreen(Screen):
-    pass
+from kivymd.app import MDApp
 
-class IdentifyPersonScreen(Screen):
-    pass
-
-class SelfDescriptionScreen(Screen):
-    pass
-
-class LabelPhotosScreen(Screen):
-    pass
-
-class WindowManager(ScreenManager):
-    pass
-
-class IKnowApp(App):
+class iKnowU(MDApp):
     def build(self):
-        return kv
+        return
 
-if __name__ == '__main__':
-    IKnowApp().run()
+iKnowU().run()
