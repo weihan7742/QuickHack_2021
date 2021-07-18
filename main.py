@@ -7,7 +7,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
 from kivy.uix.camera import Camera
-from QuickHack_2021.sqlite import *
+from sqlite import *
 
 
 from kivymd.uix.button import MDRectangleFlatButton
@@ -61,13 +61,12 @@ class iKnowU(MDApp):
     def close_popup(self,obj):
         self.dialog.dismiss()
 
-<<<<<<< HEAD
     def load_facial(self):
         self.cam_app.run()
 
     def stop_facial(self):
         self.cam_app.my_camera.stop()
-=======
+
     def capture(self):
         self.num += 1
         camera = self.ids['camera']
@@ -83,7 +82,6 @@ class iKnowU(MDApp):
             insert_image(id, '1234', self.image, )
 
         os.remove(self.image)
->>>>>>> d9668b2e94867d3a11ed54f0622459e842e0f702
 
 if __name__ == "__main__":
     iKnowU().run()
