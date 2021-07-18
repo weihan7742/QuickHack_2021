@@ -100,7 +100,18 @@ ScreenManager:
         pos_hint: {"center_x":0.5, "center_y":0.07}
         on_press:
             root.manager.current = "welcome"
-            root.manager.transition.direction = 'right'
+            root.manager.transition.direction = 'left'
+
+<PopUpScreen>:
+    MDCard:
+        size_hint: None, None
+        size: 220, 120
+        pos_hint: {"center_x":0.5, "center_y":0.2}
+        elevation: 5
+        md_bg_color: [1,1,1,1]
+
+    MD
+
 
 <RememberScreen>:
     name: 'remember'
@@ -128,10 +139,11 @@ ScreenManager:
         text: "Save"
         font_size: "30sp"
         font_name: "Roboto"
-        md_bg_color: [197/255, 242/255, 229/255, 1]
+        md_bg_color: [197/255, 242/255, 230/255, 1]
         elevation: 10
         pos_hint: {"center_x":0.5, "center_y":0.2}
         on_press:
+            app.popup_msg()
 
 
 
