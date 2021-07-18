@@ -1,9 +1,9 @@
 #%% Import libraries
 import os
-from PIL import Image
+from PIL import Image # pip install pillow --upgrade 
 import numpy as np
-import cv2
-import pickle
+import cv2 # pip install opencv-contrib-python --upgrade
+import pickle 
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_alt2.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -16,7 +16,7 @@ x_train = []
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
 
-for root, dirs, files in os.walk(image_dir):
+for root, dirs, files in os.walk(image_dir): # Directory
     for file in files:
         if file.endswith("png") or file.endswith("jpg"):
             path = os.path.join(root,file)
