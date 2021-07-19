@@ -10,7 +10,7 @@ from kivy.uix.camera import Camera
 from sqlite import *
 import shutil
 import glob
-
+from train_faces import Train
 
 from kivymd.uix.button import MDRectangleFlatButton
 from kivy.uix.camera import Camera
@@ -70,19 +70,32 @@ class iKnowU(MDApp):
 
     def save_image(self, name, relationship):
         path = "image.png"
-        if not get_family_id(name, '', '1234'):
-            insert_family('1234', "image.png", name, '')
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+        path_dir = os.path.join(BASE_DIR,path)
+        image_dir = os.path.join(BASE_DIR, "images",name)
+
+
+        if not os.path.exists(image_dir):
+            # insert_family('1234', "image.png", name, '')
             os.mkdir("images/" + name + "/")
             destination = "images/" + name + '/' + name + "_1" + ".png"
             shutil.move(str(path), destination)
         else:
-            list_of_files = glob.glob('/images/' + name + '/*')  # * means all if need specific format then *.csv
-            latest_file = max(list_of_files, key=os.path.getctime)
-            num = int(latest_file[-1])
-            id = get_family_id(name, '', '1234')
-            insert_image(id, '1234', "image.png", relationship)
-            destination = "images/" + name + '/' + name + '/_' + str(num+1) + ".png"
-            shutil.move(str(path), destination)
+            # Get the number of files in the directory 
+            root, dirs, files = next(os.walk(image_dir))
+            num = len(files)
+            # id = get_family_id(name, '', '1234')
+            # insert_image(id, '1234', "image.png", relationship)
+            insert_image = os.path.join(BASE_DIR,"images",name,name+"_"+str(num+1)+".png")
+            os.rename(path_dir,insert_image)
+
+    def run_facial(self):
+        CamApp().run()
+
+
+    def training(self):
+        Train().training()
 
 if __name__ == "__main__":
     iKnowU().run()

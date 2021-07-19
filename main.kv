@@ -166,14 +166,14 @@ ScreenManager:
             root.manager.transition.direction = 'right'
 
     MDRaisedButton:
-        text: "See"
+        text: "Train"
         font_size: "30sp"
         font_name: 'fonts/Lato-Regular.ttf'
         md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
         pos_hint: {"center_x":0.5, "center_y":0.1}
         on_press:
-            app.load_facial()
+            app.training()
 
     MDRaisedButton:
         text: "Save"
@@ -194,15 +194,26 @@ ScreenManager:
 
 
     MDRaisedButton:
-        text: "Take A Picture"
+        text: "Recognize"
         font_size: "30sp"
         font_name: "Roboto"
         md_bg_color: [151/255, 236/255,248/255,1]
         elevation: 10
         pos_hint: {"center_x":0.25, "center_y":0.1}
         on_press:
-            root.manager.current = "camera"
+            app.run_facial()
+
+    MDRaisedButton:
+        text: "Menu"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+        on_press:
+            root.manager.current = "welcome"
             root.manager.transition.direction = 'right'
+            
 
 <CameraClickScreen>:
     name: "camera"
@@ -226,26 +237,6 @@ ScreenManager:
                 root.capture()
                 root.manager.transition.direction = 'right'
                 root.manager.current = "remember"
-
-    MDLabel:
-        text: "Name: \n\n\n\nRelationship:"
-        font_size: "25sp"
-        font_name: 'fonts/Lato-Regular.ttf'
-        text_color: [52/255, 53/255, 84/255, 1]
-        halign: "center"
-        valign: "top"
-        pos_hint: {"center_x":0.5, "center_y":0.4}
-
-    MDRaisedButton:
-        text: "Menu"
-        font_size: "30sp"
-        font_name: 'fonts/Lato-Regular.ttf'
-        md_bg_color: [151/255, 236/255,248/255,1]
-        elevation: 10
-        pos_hint: {"center_x":0.5, "center_y":0.1}
-        on_press:
-            root.manager.current = "welcome"
-            root.manager.transition.direction = 'right'
 
     # if time allows do call button for caregiver contact
 

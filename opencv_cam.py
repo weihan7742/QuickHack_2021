@@ -67,7 +67,7 @@ class KivyCamera(Image):
 class CamApp(MDApp):
     def build(self):
         self.capture = cv2.VideoCapture(0)
-        self.my_camera = KivyCamera(capture=self.capture, fps=30)
+        self.my_camera = KivyCamera(capture=self.capture, fps=30,pos_hint={'center_x':0.5,'center_y':0.7})
 
         return self.my_camera
 
