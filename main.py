@@ -9,7 +9,6 @@ from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton
 from kivy.uix.camera import Camera
 from sqlite import *
 import shutil
-import glob
 from train_faces import Train
 
 from kivymd.uix.button import MDRectangleFlatButton

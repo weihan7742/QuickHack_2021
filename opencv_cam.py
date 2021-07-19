@@ -10,6 +10,7 @@ from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDRectangleFlatButton
 from kivymd.uix.screen import Screen
 import time
+from kivy.lang import Builder
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
@@ -67,14 +68,13 @@ class KivyCamera(Image):
 class CamApp(MDApp):
     def build(self):
         self.capture = cv2.VideoCapture(0)
-        self.my_camera = KivyCamera(capture=self.capture, fps=30,pos_hint={'center_x':0.5,'center_y':0.7})
-
+        self.my_camera = KivyCamera(capture=self.capture, fps=30)
+        
         return self.my_camera
 
     def on_stop(self):
         #without this, app will not exit even if the window is closed
         self.capture.release()
-
 
 if __name__ == '__main__':
     CamApp().run()

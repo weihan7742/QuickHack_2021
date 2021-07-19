@@ -1,0 +1,27 @@
+# Creating the Screens
+
+# Screen management
+ScreenManager:
+    RecogniseScreen:
+
+# When user doesn't recognise a person, use this feature to do facial recognition to check
+<RecogniseScreen>:
+    name: "recognise"
+    orientation: "vertical"
+
+    MDRaisedButton:
+        text: "Recognize"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.25, "center_y":0.1}
+
+    MDRaisedButton:
+        text: "Menu"
+        font_size: "30sp"
+        font_name: "Roboto"
+        md_bg_color: [151/255, 236/255,248/255,1]
+        elevation: 10
+        pos_hint: {"center_x":0.75, "center_y":0.1}
+            
