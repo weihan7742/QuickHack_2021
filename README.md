@@ -3,6 +3,7 @@
 1. pip install pillow, kivy, kivmd, numpy
 2. install python version >= 3.6
 3. run command "pip install opencv-contrib-python --upgrade"
+4. run "main.py"
 
 ### Theme Selected
 1. Mental Health
